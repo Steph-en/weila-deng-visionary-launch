@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Facebook } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import contactHero from "@/assets/contact-hero.jpg";
 
 const Contact = () => {
   const [heroVisible, setHeroVisible] = useState(false);
@@ -47,14 +48,18 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-navy overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-            backgroundSize: '40px 40px',
-          }} />
+      {/* Hero Section with Image */}
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src={contactHero} 
+            alt="International conference" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
         </div>
+
         <div className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
 
         <div className="container-elegant relative z-10">
