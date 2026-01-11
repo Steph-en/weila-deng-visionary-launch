@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Briefcase, Globe, Heart, BookOpen, Utensils, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
+import aboutPortrait from "@/assets/about-portrait.jpg";
+import speakingEvent from "@/assets/speaking-event.jpg";
+import solarProject from "@/assets/solar-project.jpg";
+import manufacturing from "@/assets/manufacturing.jpg";
 
 const About = () => {
   const [heroVisible, setHeroVisible] = useState(false);
@@ -44,16 +48,19 @@ const About = () => {
       year: "2003",
       title: "CEO of Suiming Group",
       description: "Transformed a local enterprise into an internationally recognized high-tech company.",
+      image: manufacturing,
     },
     {
       year: "2016",
       title: "CEO of Jakdam Group Limited",
       description: "Expanded leadership to a diversified conglomerate with capabilities in construction and hydropower.",
+      image: speakingEvent,
     },
     {
       year: "2016-2018",
       title: "Sierra Leone Commercial Counsellor",
       description: "Strengthened Sino-African economic relations as Commercial Counsellor in Guangzhou.",
+      image: solarProject,
     },
   ];
 
@@ -61,8 +68,8 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-navy overflow-hidden">
+      {/* Hero Section with Image */}
+      <section className="relative pt-24 pb-0 md:pt-32 bg-gradient-navy overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
@@ -72,31 +79,55 @@ const About = () => {
         <div className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
 
         <div className="container-elegant relative z-10">
-          <div className="max-w-3xl">
-            <span className={cn(
-              "text-refined text-gold block mb-4 opacity-0",
-              heroVisible && "animate-fade-in"
-            )}>
-              About
-            </span>
-            <h1 className={cn(
-              "font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.1s' }}>
-              Weila Deng
-            </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            {/* Left Content */}
+            <div className="pb-16 md:pb-24">
+              <span className={cn(
+                "text-refined text-gold block mb-4 opacity-0",
+                heroVisible && "animate-fade-in"
+              )}>
+                About
+              </span>
+              <h1 className={cn(
+                "font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0",
+                heroVisible && "animate-fade-in"
+              )} style={{ animationDelay: '0.1s' }}>
+                Weila Deng
+              </h1>
+              <div className={cn(
+                "w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0",
+                heroVisible && "animate-fade-in"
+              )} style={{ animationDelay: '0.2s' }} />
+              <p className={cn(
+                "text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0",
+                heroVisible && "animate-fade-in"
+              )} style={{ animationDelay: '0.3s' }}>
+                A visionary leader in international business, establishing herself as a 
+                prominent figure in global commerce, particularly in fostering economic 
+                ties between Asia and Africa.
+              </p>
+            </div>
+
+            {/* Right - Portrait */}
             <div className={cn(
-              "w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0",
+              "relative opacity-0",
               heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.2s' }} />
-            <p className={cn(
-              "text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.3s' }}>
-              A visionary leader in international business, establishing herself as a 
-              prominent figure in global commerce, particularly in fostering economic 
-              ties between Asia and Africa.
-            </p>
+            )} style={{ animationDelay: '0.4s' }}>
+              <div className="relative">
+                {/* Decorative frame */}
+                <div className="absolute -top-4 -right-4 w-32 h-32 border-2 border-gold/30 rounded-lg hidden md:block" />
+                
+                {/* Portrait */}
+                <div className="relative rounded-t-lg overflow-hidden shadow-2xl">
+                  <img 
+                    src={aboutPortrait} 
+                    alt="Madam Weila Deng" 
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -190,39 +221,48 @@ const About = () => {
             </h2>
           </div>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gold/30 -translate-x-1/2 hidden md:block" />
-
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 opacity-0",
-                    journeyVisible && "animate-fade-in-up"
-                  )}
-                  style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-gold rounded-full -translate-x-1/2 hidden md:block shadow-gold" />
-
-                  <div className={cn(
-                    "md:text-right md:pr-16",
-                    index % 2 === 1 && "md:order-2 md:text-left md:pl-16 md:pr-0"
-                  )}>
-                    <span className="font-serif text-3xl text-gold">{milestone.year}</span>
-                  </div>
-                  <div className={cn(
-                    "md:pl-16",
-                    index % 2 === 1 && "md:order-1 md:pr-16 md:pl-0 md:text-right"
-                  )}>
-                    <h3 className="font-serif text-xl text-foreground mb-2">{milestone.title}</h3>
-                    <p className="text-muted-foreground">{milestone.description}</p>
+          {/* Timeline with Images */}
+          <div className="space-y-16">
+            {milestones.map((milestone, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "grid grid-cols-1 lg:grid-cols-2 gap-8 items-center opacity-0",
+                  journeyVisible && "animate-fade-in-up",
+                  index % 2 === 1 && "lg:flex-row-reverse"
+                )}
+                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+              >
+                {/* Image */}
+                <div className={cn(
+                  "relative rounded-lg overflow-hidden group",
+                  index % 2 === 1 && "lg:order-2"
+                )}>
+                  <img 
+                    src={milestone.image} 
+                    alt={milestone.title}
+                    className="w-full h-64 md:h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 bg-gradient-gold px-4 py-2 rounded-md">
+                    <span className="font-serif text-navy font-medium">{milestone.year}</span>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                {/* Content */}
+                <div className={cn(
+                  "space-y-4",
+                  index % 2 === 1 && "lg:order-1 lg:text-right"
+                )}>
+                  <h3 className="font-serif text-2xl md:text-3xl text-foreground">{milestone.title}</h3>
+                  <div className={cn(
+                    "w-16 h-px bg-gradient-to-r from-gold to-transparent",
+                    index % 2 === 1 && "lg:ml-auto lg:bg-gradient-to-l"
+                  )} />
+                  <p className="text-muted-foreground text-lg leading-relaxed">{milestone.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
