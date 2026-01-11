@@ -128,7 +128,7 @@ const HeroSection = () => {
         style={{ animationDelay: '1.3s' }}
         aria-label="Scroll to content"
       >
-        <span className="text-xs tracking-widest uppercase">Discover</span>
+        <span className="text-xs tracking-widest uppercase"></span>
         <ChevronDown className="w-5 h-5 animate-float" />
       </button>
     </section>
