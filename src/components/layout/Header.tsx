@@ -1,0 +1,126 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-soft py-4"
+          : "bg-transparent py-6"
+      )}
+    >
+      <div className="container-elegant flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="group flex items-center gap-3"
+        >
+          <div className="w-10 h-10 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold">
+            <span className="font-serif text-lg font-semibold text-navy">W</span>
+          </div>
+          <div className="hidden sm:block">
+            <span className="font-serif text-xl font-medium tracking-wide text-foreground">
+              Weila Deng
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={cn(
+                "relative text-sm font-medium tracking-wide transition-colors duration-300",
+                location.pathname === link.path
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+                "after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold after:transition-all after:duration-300",
+                location.pathname === link.path
+                  ? "after:w-full"
+                  : "after:w-0 hover:after:w-full"
+              )}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA Button */}
+        <div className="hidden md:block">
+          <Link to="/contact">
+            <Button variant="elegant" size="sm">
+              Let's Connect
+            </Button>
+          </Link>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden p-2 text-foreground"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={cn(
+          "md:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-md shadow-elevated overflow-hidden transition-all duration-500",
+          isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <nav className="container-elegant py-6 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={cn(
+                "text-lg font-medium tracking-wide py-2 transition-colors",
+                location.pathname === link.path
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              )}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button variant="elegant" className="w-full mt-2">
+              Let's Connect
+            </Button>
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
