@@ -8,55 +8,53 @@ import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Facebook } from "lucide-r
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import contactHero from "@/assets/contact-hero.jpg";
-
 const Contact = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    message: "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     setHeroVisible(true);
   }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
+    await new Promise(resolve => setTimeout(resolve, 1500));
     toast({
       title: "Message Sent",
-      description: "Thank you for reaching out. We'll get back to you soon.",
+      description: "Thank you for reaching out. We'll get back to you soon."
     });
-
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    });
     setIsSubmitting(false);
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section with Image */}
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img 
-            src={contactHero} 
-            alt="International conference" 
-            className="w-full h-full object-cover"
-          />
+          <img src={contactHero} alt="International conference" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
         </div>
 
@@ -64,26 +62,20 @@ const Contact = () => {
 
         <div className="container-elegant relative z-10">
           <div className="max-w-3xl">
-            <span className={cn(
-              "text-refined text-gold block mb-4 opacity-0",
-              heroVisible && "animate-fade-in"
-            )}>
+            <span className={cn("text-refined text-gold block mb-4 opacity-0", heroVisible && "animate-fade-in")}>
               Contact
             </span>
-            <h1 className={cn(
-              "font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.1s' }}>
+            <h1 className={cn("font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0", heroVisible && "animate-fade-in")} style={{
+            animationDelay: '0.1s'
+          }}>
               Let's Connect
             </h1>
-            <div className={cn(
-              "w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.2s' }} />
-            <p className={cn(
-              "text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.3s' }}>
+            <div className={cn("w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0", heroVisible && "animate-fade-in")} style={{
+            animationDelay: '0.2s'
+          }} />
+            <p className={cn("text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0", heroVisible && "animate-fade-in")} style={{
+            animationDelay: '0.3s'
+          }}>
               Together, we can build bridges of opportunity and illuminate paths 
               to prosperity across continents.
             </p>
@@ -109,30 +101,13 @@ const Contact = () => {
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Your Name
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="bg-background border-border focus:border-gold focus:ring-gold"
-                      placeholder="John Doe"
-                    />
+                    <Input id="name" name="name" value={formData.name} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="John Doe" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email Address
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-background border-border focus:border-gold focus:ring-gold"
-                      placeholder="john@example.com"
-                    />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="john@example.com" />
                   </div>
                 </div>
 
@@ -140,48 +115,21 @@ const Contact = () => {
                   <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                     Subject
                   </label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="bg-background border-border focus:border-gold focus:ring-gold"
-                    placeholder="How can we help?"
-                  />
+                  <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="How can we help?" />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Message
                   </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="bg-background border-border focus:border-gold focus:ring-gold resize-none"
-                    placeholder="Tell us about your project or inquiry..."
-                  />
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={6} className="bg-background border-border focus:border-gold focus:ring-gold resize-none" placeholder="Tell us about your project or inquiry..." />
                 </div>
 
-                <Button
-                  type="submit"
-                  variant="elegant"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto"
-                >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
+                <Button type="submit" variant="elegant" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+                  {isSubmitting ? "Sending..." : <>
                       Send Message
                       <Send className="w-4 h-4 ml-2" />
-                    </>
-                  )}
+                    </>}
                 </Button>
               </form>
             </div>
@@ -192,10 +140,7 @@ const Contact = () => {
                 <h3 className="font-serif text-2xl text-foreground mb-6">Get in Touch</h3>
                 
                 <div className="space-y-6">
-                  <a
-                    href="tel:+233592763541"
-                    className="flex items-start gap-4 group"
-                  >
+                  <a href="tel:+233592763541" className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-full bg-background flex items-center justify-center shadow-soft group-hover:shadow-gold transition-shadow duration-300">
                       <Phone className="w-5 h-5 text-gold" />
                     </div>
@@ -207,10 +152,7 @@ const Contact = () => {
                     </div>
                   </a>
 
-                  <a
-                    href="mailto:info@weiladeng.com"
-                    className="flex items-start gap-4 group"
-                  >
+                  <a href="mailto:info@weiladeng.com" className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-full bg-background flex items-center justify-center shadow-soft group-hover:shadow-gold transition-shadow duration-300">
                       <Mail className="w-5 h-5 text-gold" />
                     </div>
@@ -237,35 +179,7 @@ const Contact = () => {
               </div>
 
               {/* Social Links */}
-              <div className="bg-primary rounded-lg p-8 text-primary-foreground">
-                <h3 className="font-serif text-xl mb-4">Follow Along</h3>
-                <p className="text-primary-foreground/70 text-sm mb-6">
-                  Connect on social media for updates and insights.
-                </p>
-                <div className="flex items-center gap-4">
-                  <a
-                    href="#"
-                    className="w-11 h-11 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-300"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin size={18} />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-11 h-11 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-300"
-                    aria-label="Twitter"
-                  >
-                    <Twitter size={18} />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-11 h-11 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-300"
-                    aria-label="Facebook"
-                  >
-                    <Facebook size={18} />
-                  </a>
-                </div>
-              </div>
+              
 
               {/* Newsletter */}
               <div className="mt-8 p-8 border border-border rounded-lg">
@@ -274,11 +188,7 @@ const Contact = () => {
                   Subscribe to the newsletter for insights and updates.
                 </p>
                 <div className="flex gap-3">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 bg-background"
-                  />
+                  <Input type="email" placeholder="Enter your email" className="flex-1 bg-background" />
                   <Button variant="elegant" size="default">
                     Subscribe
                   </Button>
@@ -290,8 +200,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
