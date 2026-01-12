@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Facebook } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { motion, useScroll, useTransform } from "framer-motion";
 import contactHero from "@/assets/contact-hero.jpg";
+
 const Contact = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,12 +19,25 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Parallax for hero section
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.3]);
+
   useEffect(() => {
     setHeroVisible(true);
   }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -41,46 +56,76 @@ const Contact = () => {
     });
     setIsSubmitting(false);
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section with Image */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img src={contactHero} alt="International conference" className="w-full h-full object-cover" />
+      {/* Hero Section with Parallax */}
+      <section ref={heroRef} className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+        {/* Background Image with Parallax */}
+        <motion.div 
+          className="absolute inset-0"
+          style={{ y: backgroundY, scale: backgroundScale }}
+        >
+          <img 
+            src={contactHero} 
+            alt="International conference" 
+            className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
-        </div>
+        </motion.div>
 
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+        {/* Floating decorative elements with parallax */}
+        <motion.div 
+          className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl"
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]) }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 left-1/4 w-60 h-60 bg-gold/5 rounded-full blur-3xl"
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "30%"]) }}
+        />
 
-        <div className="container-elegant relative z-10">
+        <motion.div 
+          className="container-elegant relative z-10"
+          style={{ y: contentY, opacity: contentOpacity }}
+        >
           <div className="max-w-3xl">
-            <span className={cn("text-refined text-gold block mb-4 opacity-0", heroVisible && "animate-fade-in")}>
+            <span className={cn(
+              "text-refined text-gold block mb-4 opacity-0",
+              heroVisible && "animate-fade-in"
+            )}>
               Contact
             </span>
-            <h1 className={cn("font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0", heroVisible && "animate-fade-in")} style={{
-            animationDelay: '0.1s'
-          }}>
+            <h1 className={cn(
+              "font-serif text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 opacity-0",
+              heroVisible && "animate-fade-in"
+            )} style={{ animationDelay: '0.1s' }}>
               Let's Connect
             </h1>
-            <div className={cn("w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0", heroVisible && "animate-fade-in")} style={{
-            animationDelay: '0.2s'
-          }} />
-            <p className={cn("text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0", heroVisible && "animate-fade-in")} style={{
-            animationDelay: '0.3s'
-          }}>
+            <motion.div 
+              className={cn(
+                "w-24 h-px bg-gradient-to-r from-gold to-transparent mb-8 opacity-0",
+                heroVisible && "animate-fade-in"
+              )} 
+              style={{ animationDelay: '0.2s' }}
+            />
+            <p className={cn(
+              "text-primary-foreground/70 text-lg md:text-xl leading-relaxed opacity-0",
+              heroVisible && "animate-fade-in"
+            )} style={{ animationDelay: '0.3s' }}>
               Together, we can build bridges of opportunity and illuminate paths 
               to prosperity across continents.
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Contact Section */}
@@ -101,13 +146,30 @@ const Contact = () => {
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Your Name
                     </label>
-                    <Input id="name" name="name" value={formData.name} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="John Doe" />
+                    <Input 
+                      id="name" 
+                      name="name" 
+                      value={formData.name} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-background border-border focus:border-gold focus:ring-gold" 
+                      placeholder="John Doe" 
+                    />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email Address
                     </label>
-                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="john@example.com" />
+                    <Input 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      value={formData.email} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-background border-border focus:border-gold focus:ring-gold" 
+                      placeholder="john@example.com" 
+                    />
                   </div>
                 </div>
 
@@ -115,21 +177,40 @@ const Contact = () => {
                   <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                     Subject
                   </label>
-                  <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} required className="bg-background border-border focus:border-gold focus:ring-gold" placeholder="How can we help?" />
+                  <Input 
+                    id="subject" 
+                    name="subject" 
+                    value={formData.subject} 
+                    onChange={handleChange} 
+                    required 
+                    className="bg-background border-border focus:border-gold focus:ring-gold" 
+                    placeholder="How can we help?" 
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Message
                   </label>
-                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={6} className="bg-background border-border focus:border-gold focus:ring-gold resize-none" placeholder="Tell us about your project or inquiry..." />
+                  <Textarea 
+                    id="message" 
+                    name="message" 
+                    value={formData.message} 
+                    onChange={handleChange} 
+                    required 
+                    rows={6} 
+                    className="bg-background border-border focus:border-gold focus:ring-gold resize-none" 
+                    placeholder="Tell us about your project or inquiry..." 
+                  />
                 </div>
 
                 <Button type="submit" variant="elegant" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
-                  {isSubmitting ? "Sending..." : <>
+                  {isSubmitting ? "Sending..." : (
+                    <>
                       Send Message
                       <Send className="w-4 h-4 ml-2" />
-                    </>}
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
@@ -178,9 +259,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Social Links */}
-              
-
               {/* Newsletter */}
               <div className="mt-8 p-8 border border-border rounded-lg">
                 <h3 className="font-serif text-xl text-foreground mb-2">Stay Updated</h3>
@@ -188,7 +266,11 @@ const Contact = () => {
                   Subscribe to the newsletter for insights and updates.
                 </p>
                 <div className="flex gap-3">
-                  <Input type="email" placeholder="Enter your email" className="flex-1 bg-background" />
+                  <Input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className="flex-1 bg-background" 
+                  />
                   <Button variant="elegant" size="default">
                     Subscribe
                   </Button>
@@ -200,6 +282,8 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Contact;

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Briefcase, Globe, Heart, BookOpen, Utensils, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion, useScroll, useTransform } from "framer-motion";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import speakingEvent from "@/assets/speaking-event.jpg";
 import solarProject from "@/assets/solar-project.jpg";
@@ -16,9 +17,21 @@ const About = () => {
   const [journeyVisible, setJourneyVisible] = useState(false);
   const [philosophyVisible, setPhilosophyVisible] = useState(false);
 
+  const heroRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLDivElement>(null);
   const journeyRef = useRef<HTMLDivElement>(null);
   const philosophyRef = useRef<HTMLDivElement>(null);
+
+  // Parallax for hero section
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroBackgroundY = useTransform(heroScrollProgress, [0, 1], ["0%", "25%"]);
+  const heroContentY = useTransform(heroScrollProgress, [0, 1], ["0%", "15%"]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.8], [1, 0.4]);
+  const heroPortraitY = useTransform(heroScrollProgress, [0, 1], ["0%", "10%"]);
 
   useEffect(() => {
     setHeroVisible(true);
@@ -68,20 +81,31 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section with Image */}
-      <section className="relative pt-24 pb-0 md:pt-32 bg-gradient-navy overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
+      {/* Hero Section with Parallax */}
+      <section ref={heroRef} className="relative pt-24 pb-0 md:pt-32 bg-gradient-navy overflow-hidden">
+        {/* Background Pattern with Parallax */}
+        <motion.div 
+          className="absolute inset-0 opacity-5"
+          style={{ y: heroBackgroundY }}
+        >
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
             backgroundSize: '40px 40px',
           }} />
-        </div>
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+        </motion.div>
+        
+        <motion.div 
+          className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl"
+          style={{ y: useTransform(heroScrollProgress, [0, 1], ["0%", "40%"]) }}
+        />
 
         <div className="container-elegant relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-            {/* Left Content */}
-            <div className="pb-16 md:pb-24">
+            {/* Left Content with Parallax */}
+            <motion.div 
+              className="pb-16 md:pb-24"
+              style={{ y: heroContentY, opacity: heroOpacity }}
+            >
               <span className={cn(
                 "text-refined text-gold block mb-4 opacity-0",
                 heroVisible && "animate-fade-in"
@@ -106,16 +130,22 @@ const About = () => {
                 prominent figure in global commerce, particularly in fostering economic 
                 ties between Asia and Africa.
               </p>
-            </div>
+            </motion.div>
 
-            {/* Right - Portrait */}
-            <div className={cn(
-              "relative opacity-0",
-              heroVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.4s' }}>
+            {/* Right - Portrait with Parallax */}
+            <motion.div 
+              className={cn(
+                "relative opacity-0",
+                heroVisible && "animate-fade-in"
+              )} 
+              style={{ animationDelay: '0.4s', y: heroPortraitY }}
+            >
               <div className="relative">
-                {/* Decorative frame */}
-                <div className="absolute -top-4 -right-4 w-32 h-32 border-2 border-gold/30 rounded-lg hidden md:block" />
+                {/* Decorative frame with parallax */}
+                <motion.div 
+                  className="absolute -top-4 -right-4 w-32 h-32 border-2 border-gold/30 rounded-lg hidden md:block"
+                  style={{ y: useTransform(heroScrollProgress, [0, 1], ["0%", "-15%"]) }}
+                />
                 
                 {/* Portrait */}
                 <div className="relative rounded-t-lg overflow-hidden shadow-2xl">
@@ -127,7 +157,7 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent" />
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
