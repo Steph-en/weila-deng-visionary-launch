@@ -5,13 +5,16 @@ import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import PageTransition from "./PageTransition";
+import ScrollProgress from "./ScrollProgress";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+    <>
+      <ScrollProgress />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
         <Route
           path="/"
           element={
@@ -44,8 +47,9 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
-      </Routes>
-    </AnimatePresence>
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 };
 
