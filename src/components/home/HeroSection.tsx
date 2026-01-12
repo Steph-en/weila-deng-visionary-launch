@@ -1,10 +1,25 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import heroPortrait from "@/assets/hero-portrait.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+
   const scrollToContent = () => {
     window.scrollTo({
       top: window.innerHeight - 100,
@@ -13,26 +28,38 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image with Parallax */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: backgroundY, scale }}
+      >
         <img 
           src={heroBg} 
           alt="Infrastructure development" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
-      </div>
+      </motion.div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-pulse-gentle" />
-      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-pulse-gentle animation-delay-300" />
+      {/* Decorative Elements with Parallax */}
+      <motion.div 
+        className="absolute top-1/4 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-pulse-gentle"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]) }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-pulse-gentle animation-delay-300"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "30%"]) }}
+      />
       
       {/* Floating Gold Accent Lines */}
       <div className="absolute top-1/3 left-1/4 w-32 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent animate-float" />
       <div className="absolute bottom-1/3 right-1/4 w-48 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent animate-float animation-delay-200" />
 
-      <div className="container-elegant relative z-10 pt-24 pb-16">
+      <motion.div 
+        className="container-elegant relative z-10 pt-24 pb-16"
+        style={{ y: contentY, opacity }}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
@@ -80,13 +107,25 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right - Portrait */}
-          <div className="relative hidden lg:block opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          {/* Right - Portrait with Parallax */}
+          <motion.div 
+            className="relative hidden lg:block opacity-0 animate-fade-in" 
+            style={{ animationDelay: '0.8s', y: portraitY }}
+          >
             <div className="relative">
               {/* Decorative frame */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-gold/20 to-transparent rounded-lg blur-xl" />
-              <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-gold/30 rounded-lg" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-gold/30 rounded-lg" />
+              <motion.div 
+                className="absolute -inset-4 bg-gradient-to-br from-gold/20 to-transparent rounded-lg blur-xl"
+                style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]) }}
+              />
+              <motion.div 
+                className="absolute -top-6 -right-6 w-32 h-32 border-2 border-gold/30 rounded-lg"
+                style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]) }}
+              />
+              <motion.div 
+                className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-gold/30 rounded-lg"
+                style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "10%"]) }}
+              />
               
               {/* Portrait Image */}
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
@@ -99,11 +138,14 @@ const HeroSection = () => {
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-gradient-gold px-6 py-3 rounded-lg shadow-gold">
+              <motion.div 
+                className="absolute -bottom-4 -right-4 bg-gradient-gold px-6 py-3 rounded-lg shadow-gold"
+                style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "20%"]) }}
+              >
                 <span className="text-navy font-medium text-sm">20+ Years of Impact</span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Achievement Highlights - Mobile/Tablet */}
@@ -119,18 +161,18 @@ const HeroSection = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
-      <button
+      <motion.button
         onClick={scrollToContent}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary-foreground/40 hover:text-primary-foreground/60 transition-colors cursor-pointer opacity-0 animate-fade-in"
-        style={{ animationDelay: '1.3s' }}
+        style={{ animationDelay: '1.3s', opacity }}
         aria-label="Scroll to content"
       >
         <span className="text-xs tracking-widest uppercase"></span>
         <ChevronDown className="w-5 h-5 animate-float" />
-      </button>
+      </motion.button>
     </section>
   );
 };
