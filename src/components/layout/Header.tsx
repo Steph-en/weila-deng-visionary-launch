@@ -72,11 +72,12 @@ const Header = () => {
               key={link.path}
               to={link.path}
               className={cn(
-                "relative text-sm font-medium tracking-wide transition-colors duration-300",
+                "relative text-sm font-medium tracking-wide transition-all duration-300 py-1",
+                "hover:-translate-y-0.5",
                 location.pathname === link.path
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
-                "after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold after:transition-all after:duration-300",
+                "after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold after:transition-all after:duration-300 after:ease-out",
                 location.pathname === link.path
                   ? "after:w-full"
                   : "after:w-0 hover:after:w-full"
@@ -89,8 +90,12 @@ const Header = () => {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Link to="/contact">
-            <Button variant="elegant" size="sm">
+          <Link to="/contact" className="group">
+            <Button 
+              variant="elegant" 
+              size="sm"
+              className="transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+            >
               Let's Connect
             </Button>
           </Link>
