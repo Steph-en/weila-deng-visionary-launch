@@ -26,23 +26,40 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-soft py-4"
-          : "bg-transparent py-6"
+          ? "bg-background/95 backdrop-blur-md shadow-soft py-2"
+          : "bg-transparent py-5"
       )}
     >
       <div className="container-elegant flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="group flex items-center gap-3"
+          className="group flex items-center gap-2 transition-all duration-500"
         >
-          <div className="w-10 h-10 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold">
-            <span className="font-serif text-lg font-semibold text-navy">W</span>
+          <div 
+            className={cn(
+              "rounded-full bg-gradient-gold flex items-center justify-center shadow-gold transition-all duration-500",
+              isScrolled ? "w-8 h-8" : "w-10 h-10"
+            )}
+          >
+            <span 
+              className={cn(
+                "font-serif font-semibold text-navy transition-all duration-500",
+                isScrolled ? "text-sm" : "text-lg"
+              )}
+            >
+              W
+            </span>
           </div>
-          <div className="hidden sm:block">
-            <span className="font-serif text-xl font-medium tracking-wide text-foreground">
+          <div className="hidden sm:block overflow-hidden">
+            <span 
+              className={cn(
+                "font-serif font-medium tracking-wide text-foreground transition-all duration-500 block",
+                isScrolled ? "text-lg" : "text-xl"
+              )}
+            >
               Weila Deng
             </span>
           </div>
