@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
+import Projects from "@/pages/Projects";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import PageTransition from "./PageTransition";
@@ -30,6 +31,14 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <About />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <PageTransition>
+                <Projects />
               </PageTransition>
             }
           />
