@@ -1,124 +1,28 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Building2, Car, Paintbrush, Zap, Factory, ArrowRight, MapPin } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Building2, Car, Paintbrush, Zap, Factory, ArrowRight } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import ProjectFilter from "@/components/projects/ProjectFilter";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { featuredProjects, keyAreas, notableBuildings, highwayProjects, waterProjects } from "@/data/projects";
 
-// Project images
-import maritimeAuthority from "@/assets/projects/maritime-authority.jpg";
-import espHeights from "@/assets/projects/esp-heights.jpg";
-import affordableHousing from "@/assets/projects/affordable-housing.jpg";
-import highwayConstruction from "@/assets/projects/highway-construction.jpg";
-import irrigationProject from "@/assets/projects/irrigation-project.jpg";
-import residentialApartments from "@/assets/projects/residential-apartments.jpg";
-
-const keyAreas = [
-  {
-    icon: Building2,
-    title: "Construction",
-    description: "Sky scrapers, residential buildings, and infrastructure projects",
-  },
-  {
-    icon: Car,
-    title: "Automobile",
-    description: "Vehicle sales, maintenance, and fleet management services",
-  },
-  {
-    icon: Paintbrush,
-    title: "Interior Design & Décor",
-    description: "Premium interior design and decoration services",
-  },
-  {
-    icon: Zap,
-    title: "Energy",
-    description: "Sustainable energy solutions and power infrastructure",
-  },
-  {
-    icon: Factory,
-    title: "Concrete Production",
-    description: "High-quality concrete manufacturing and supply",
-  },
-];
-
-const featuredProjects = [
-  {
-    title: "Ghana Maritime Authority Head Office",
-    category: "Commercial Building",
-    location: "Accra, Ghana",
-    image: maritimeAuthority,
-    description: "A landmark office complex serving as the headquarters for Ghana's maritime regulatory body.",
-  },
-  {
-    title: "ESP Heights I & II",
-    category: "Residential Tower",
-    location: "Accra, Ghana",
-    image: espHeights,
-    description: "Premium high-rise residential towers offering luxury living spaces with modern amenities.",
-  },
-  {
-    title: "64 Unit Affordable Housing Project",
-    category: "Residential Development",
-    location: "Ghana",
-    image: affordableHousing,
-    description: "A comprehensive housing initiative providing quality homes for Ghanaian families.",
-  },
-  {
-    title: "Brofoyedur – Akenkansu Highway",
-    category: "Highway Construction",
-    location: "Ghana",
-    image: highwayConstruction,
-    description: "Major highway infrastructure connecting communities and enabling economic growth.",
-  },
-  {
-    title: "Kpong Left Bank Irrigation Project",
-    category: "Water Resources",
-    location: "Kpong, Ghana",
-    image: irrigationProject,
-    description: "Large-scale irrigation infrastructure supporting agricultural development in the region.",
-  },
-  {
-    title: "Completed Residential Apartments",
-    category: "Residential Complex",
-    location: "Various Locations",
-    image: residentialApartments,
-    description: "Multiple residential apartment complexes delivering quality housing solutions.",
-  },
-];
-
-const notableBuildings = [
-  "Ghana Maritime Authority Head Office",
-  "ESP Heights I & II",
-  "12 Unit Armed Forces Housing",
-  "President's Infrastructure Initiatives - Nkoranza North",
-  "Olives Apartment",
-  "Lawra Secondary School Assembly Hall",
-  "Wa Secondary School Girls Dormitory",
-  "10 Executive Town Houses - Ministry of Works",
-];
-
-const highwayProjects = [
-  "Brofoyedur – Akenkansu Highway",
-  "Assin Manso – Essiam Highway",
-  "Buokrom Estate Urban Roads",
-  "Assin Dompim – Twifo Praso Highway",
-];
-
-const waterProjects = [
-  "Kpong Left Bank Irrigation Project",
-  "Reservoir Projects",
-  "Hydroelectric Power Stations",
-  "River Regulation Works",
-  "Tunneling Projects",
-  "Pressure Piping Infrastructure",
-];
+const areaIcons = {
+  construction: Building2,
+  automobile: Car,
+  interior: Paintbrush,
+  energy: Zap,
+  concrete: Factory,
+};
 
 const Projects = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [areasVisible, setAreasVisible] = useState(false);
   const [projectsVisible, setProjectsVisible] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("all");
   const heroRef = useRef<HTMLDivElement>(null);
   const areasRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -130,6 +34,11 @@ const Projects = () => {
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "all") return featuredProjects;
+    return featuredProjects.filter((project) => project.categorySlug === activeFilter);
+  }, [activeFilter]);
 
   useEffect(() => {
     setHeroVisible(true);
@@ -236,38 +145,41 @@ const Projects = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {keyAreas.map((area, index) => (
-              <div
-                key={area.title}
-                className={cn(
-                  "group p-6 rounded-xl bg-card border border-border hover:border-gold/30 hover:shadow-gold transition-all duration-500",
-                  areasVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                )}
-                style={{
-                  transitionDelay: areasVisible ? `${index * 100 + 300}ms` : "0ms",
-                }}
-              >
-                <div className="w-14 h-14 rounded-xl bg-gradient-gold/10 flex items-center justify-center mb-4 group-hover:bg-gradient-gold/20 transition-colors">
-                  <area.icon className="w-7 h-7 text-gold" />
+            {keyAreas.map((area, index) => {
+              const Icon = areaIcons[area.slug as keyof typeof areaIcons] || Building2;
+              return (
+                <div
+                  key={area.title}
+                  className={cn(
+                    "group p-6 rounded-xl bg-card border border-border hover:border-gold/30 hover:shadow-gold transition-all duration-500",
+                    areasVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  )}
+                  style={{
+                    transitionDelay: areasVisible ? `${index * 100 + 300}ms` : "0ms",
+                  }}
+                >
+                  <div className="w-14 h-14 rounded-xl bg-gradient-gold/10 flex items-center justify-center mb-4 group-hover:bg-gradient-gold/20 transition-colors">
+                    <Icon className="w-7 h-7 text-gold" />
+                  </div>
+                  <h3 className="font-serif text-lg font-medium text-foreground mb-2">
+                    {area.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {area.description}
+                  </p>
                 </div>
-                <h3 className="font-serif text-lg font-medium text-foreground mb-2">
-                  {area.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {area.description}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
+      {/* Featured Projects Section with Filter */}
       <section ref={projectsRef} className="section-padding bg-muted/30">
         <div className="container-elegant">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span
               className={cn(
                 "text-refined text-accent mb-3 block transition-all duration-700",
@@ -296,48 +208,42 @@ const Projects = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <div
-                key={project.title}
-                className={cn(
-                  "group rounded-xl overflow-hidden bg-card border border-border hover:shadow-elevated transition-all duration-500",
-                  projectsVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                )}
-                style={{
-                  transitionDelay: projectsVisible ? `${index * 100 + 300}ms` : "0ms",
-                }}
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-gold/90 text-navy text-xs font-medium">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-serif text-xl font-medium text-foreground mb-2 group-hover:text-gold transition-colors">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
-                    <MapPin size={14} />
-                    <span>{project.location}</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={projectsVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-12"
+          >
+            <ProjectFilter
+              activeFilter={activeFilter}
+              onFilterChange={setActiveFilter}
+            />
+          </motion.div>
+
+          {/* Projects Grid */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  isVisible={projectsVisible}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {filteredProjects.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <p className="text-muted-foreground">No projects found in this category.</p>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -483,7 +389,7 @@ const Projects = () => {
             Join us in building infrastructure that transforms communities and drives sustainable development across Africa.
           </p>
           <Link to="/contact">
-            <Button variant="elegant" size="lg" className="group">
+            <Button className="group bg-gradient-gold text-navy hover:opacity-90">
               Get in Touch
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>

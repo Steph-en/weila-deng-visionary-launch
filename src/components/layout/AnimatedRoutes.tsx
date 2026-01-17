@@ -3,6 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
 import Projects from "@/pages/Projects";
+import ProjectDetail from "@/pages/ProjectDetail";
+import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import PageTransition from "./PageTransition";
@@ -39,6 +41,22 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <Projects />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/projects/:id"
+            element={
+              <PageTransition>
+                <ProjectDetail />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <PageTransition>
+                <Team />
               </PageTransition>
             }
           />
