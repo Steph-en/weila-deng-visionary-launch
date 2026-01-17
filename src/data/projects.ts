@@ -1,9 +1,17 @@
 import maritimeAuthority from "@/assets/projects/maritime-authority.jpg";
+import maritimeProgress from "@/assets/projects/maritime-progress.jpg";
+import maritimeInterior from "@/assets/projects/maritime-interior.jpg";
 import espHeights from "@/assets/projects/esp-heights.jpg";
+import espRooftop from "@/assets/projects/esp-rooftop.jpg";
+import espInterior from "@/assets/projects/esp-interior.jpg";
 import affordableHousing from "@/assets/projects/affordable-housing.jpg";
+import housingAerial from "@/assets/projects/housing-aerial.jpg";
 import highwayConstruction from "@/assets/projects/highway-construction.jpg";
+import highwayProgress from "@/assets/projects/highway-progress.jpg";
 import irrigationProject from "@/assets/projects/irrigation-project.jpg";
+import irrigationCanal from "@/assets/projects/irrigation-canal.jpg";
 import residentialApartments from "@/assets/projects/residential-apartments.jpg";
+import apartmentsExterior from "@/assets/projects/apartments-exterior.jpg";
 
 export interface Project {
   id: string;
@@ -57,7 +65,7 @@ export const featuredProjects: Project[] = [
       { label: "Parking Spaces", value: "200+" },
       { label: "Completion", value: "2022" },
     ],
-    gallery: [maritimeAuthority],
+    gallery: [maritimeAuthority, maritimeProgress, maritimeInterior],
     year: "2022",
     client: "Ghana Maritime Authority",
     status: "Completed",
@@ -84,7 +92,7 @@ export const featuredProjects: Project[] = [
       { label: "Unit Sizes", value: "1-4 Bedrooms" },
       { label: "Amenities", value: "Pool, Gym, Spa" },
     ],
-    gallery: [espHeights],
+    gallery: [espHeights, espRooftop, espInterior],
     year: "2021",
     client: "Private Development",
     status: "Completed",
@@ -111,7 +119,7 @@ export const featuredProjects: Project[] = [
       { label: "Land Area", value: "5 Hectares" },
       { label: "Community Features", value: "Parks, Shops" },
     ],
-    gallery: [affordableHousing],
+    gallery: [affordableHousing, housingAerial],
     year: "2020",
     client: "Government of Ghana",
     status: "Completed",
@@ -138,7 +146,7 @@ export const featuredProjects: Project[] = [
       { label: "Bridges", value: "3 Major Bridges" },
       { label: "Design Speed", value: "100 km/h" },
     ],
-    gallery: [highwayConstruction],
+    gallery: [highwayConstruction, highwayProgress],
     year: "2023",
     client: "Ministry of Roads & Highways",
     status: "Completed",
@@ -165,7 +173,7 @@ export const featuredProjects: Project[] = [
       { label: "Pump Capacity", value: "5,000 m³/hour" },
       { label: "Beneficiaries", value: "10,000+ Farmers" },
     ],
-    gallery: [irrigationProject],
+    gallery: [irrigationProject, irrigationCanal],
     year: "2019",
     client: "Ghana Irrigation Development Authority",
     status: "Completed",
@@ -192,7 +200,7 @@ export const featuredProjects: Project[] = [
       { label: "Unit Types", value: "Studio to 4BR" },
       { label: "Occupancy Rate", value: "95%" },
     ],
-    gallery: [residentialApartments],
+    gallery: [residentialApartments, apartmentsExterior],
     year: "2018-2023",
     client: "Various Private Clients",
     status: "Completed",
