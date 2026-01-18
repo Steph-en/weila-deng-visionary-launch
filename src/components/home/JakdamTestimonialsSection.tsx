@@ -293,7 +293,7 @@ const JakdamTestimonialsSection = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className={cn(
+        {/* <div className={cn(
           "grid grid-cols-3 gap-6 mt-16 pt-12 border-t border-border opacity-0",
           isVisible && "animate-fade-in"
         )} style={{ animationDelay: '0.4s' }}>
@@ -309,7 +309,7 @@ const JakdamTestimonialsSection = () => {
             <div className="font-serif text-2xl md:text-3xl text-gold mb-1">25+</div>
             <div className="text-sm text-muted-foreground">Years Experience</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -22,9 +22,9 @@ const Index = () => {
         <ImpactSection />
         <MissionSection />
         <StatsSection />
-        <TestimonialsSection />
+        {/* <TestimonialsSection /> */}
         <JakdamTestimonialsSection />
-        <TimelineSection />
+        {/* <TimelineSection /> */}
         <CTASection />
       </main>
       <Footer />
