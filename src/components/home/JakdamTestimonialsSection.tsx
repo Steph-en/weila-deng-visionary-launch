@@ -1,46 +1,95 @@
 import { useEffect, useRef, useState } from "react";
-import { Quote, ChevronLeft, ChevronRight, Building2, Users, Award } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Building2, Users, Award, Handshake } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-const testimonials = [
+type TestimonialType = 'client' | 'partner';
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  icon: typeof Building2;
+  type: TestimonialType;
+}
+
+const testimonials: Testimonial[] = [
+  // Client Testimonials
   {
     quote: "Jakdam Group delivered our headquarters project on time and exceeded all quality expectations. Their professionalism and attention to detail made them the ideal construction partner.",
     author: "Dr. Kofi Mbeki",
     role: "Director, Ghana Maritime Authority",
     icon: Building2,
+    type: 'client',
   },
   {
     quote: "The ESP Heights residential development showcases world-class construction standards. Jakdam Group's expertise in luxury high-rise projects is unmatched in the region.",
     author: "Sarah Okonkwo",
     role: "Real Estate Developer",
     icon: Award,
+    type: 'client',
   },
   {
     quote: "Our highway infrastructure project was completed with remarkable efficiency. Jakdam Group demonstrated exceptional project management and engineering capabilities.",
     author: "Eng. Kwame Asante",
     role: "Ministry of Roads & Highways",
     icon: Building2,
+    type: 'client',
   },
   {
     quote: "The irrigation project has transformed agricultural productivity in our region. Jakdam Group's commitment to community development is evident in their work.",
     author: "Hon. Ama Dufie",
     role: "Ghana Irrigation Development Authority",
     icon: Users,
+    type: 'client',
+  },
+  // Partner Testimonials
+  {
+    quote: "Our partnership with Jakdam Group has been transformative. Their technical expertise and collaborative approach make them an invaluable ally in infrastructure development.",
+    author: "Michael Chen",
+    role: "CEO, Pacific Construction Partners",
+    icon: Handshake,
+    type: 'partner',
+  },
+  {
+    quote: "Working with Jakdam Group on joint ventures has consistently exceeded expectations. Their commitment to excellence aligns perfectly with our standards.",
+    author: "Fatima Al-Hassan",
+    role: "Managing Director, Gulf Engineering Alliance",
+    icon: Award,
+    type: 'partner',
+  },
+  {
+    quote: "As a materials supplier, we've found Jakdam Group to be a reliable and professional partner. Their project management ensures smooth operations and timely deliveries.",
+    author: "James Oduya",
+    role: "Director, West Africa Steel & Cement",
+    icon: Building2,
+    type: 'partner',
   },
   {
     quote: "From concept to completion, Jakdam Group maintained the highest standards of quality and safety. They are a trusted partner for large-scale construction projects.",
     author: "Chief Nana Yaw",
     role: "Traditional Council Representative",
-    icon: Award,
+    icon: Users,
+    type: 'partner',
   },
+];
+
+const filterOptions: { value: 'all' | TestimonialType; label: string }[] = [
+  { value: 'all', label: 'All Testimonials' },
+  { value: 'client', label: 'Clients' },
+  { value: 'partner', label: 'Partners' },
 ];
 
 const JakdamTestimonialsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<'all' | TestimonialType>('all');
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const filteredTestimonials = activeFilter === 'all' 
+    ? testimonials 
+    : testimonials.filter(t => t.type === activeFilter);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,20 +112,26 @@ const JakdamTestimonialsSection = () => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      setActiveIndex((prev) => (prev + 1) % filteredTestimonials.length);
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, filteredTestimonials.length]);
+
+  // Reset index when filter changes
+  useEffect(() => {
+    setActiveIndex(0);
+    setIsAutoPlaying(true);
+  }, [activeFilter]);
 
   const handlePrev = () => {
     setIsAutoPlaying(false);
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex((prev) => (prev - 1 + filteredTestimonials.length) % filteredTestimonials.length);
   };
 
   const handleNext = () => {
     setIsAutoPlaying(false);
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    setActiveIndex((prev) => (prev + 1) % filteredTestimonials.length);
   };
 
   const handleDotClick = (index: number) => {
@@ -84,19 +139,23 @@ const JakdamTestimonialsSection = () => {
     setActiveIndex(index);
   };
 
-  const currentTestimonial = testimonials[activeIndex];
-  const IconComponent = currentTestimonial.icon;
+  const handleFilterChange = (filter: 'all' | TestimonialType) => {
+    setActiveFilter(filter);
+  };
+
+  const currentTestimonial = filteredTestimonials[activeIndex];
+  const IconComponent = currentTestimonial?.icon || Building2;
 
   return (
     <section ref={sectionRef} className="section-padding bg-muted/30">
       <div className="container-elegant max-w-5xl">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <span className={cn(
             "text-refined text-gold block mb-4 opacity-0",
             isVisible && "animate-fade-in"
           )}>
-            Client Testimonials
+            Testimonials
           </span>
           <h2 className={cn(
             "font-serif text-3xl md:text-4xl text-foreground opacity-0",
@@ -110,6 +169,27 @@ const JakdamTestimonialsSection = () => {
           )} style={{ animationDelay: '0.2s' }}>
             Hear from our partners and clients about their experience working with Jakdam Group
           </p>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className={cn(
+          "flex justify-center gap-3 mb-12 opacity-0",
+          isVisible && "animate-fade-in"
+        )} style={{ animationDelay: '0.25s' }}>
+          {filterOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => handleFilterChange(option.value)}
+              className={cn(
+                "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                activeFilter === option.value
+                  ? "bg-gold text-navy shadow-gold"
+                  : "bg-background border border-border text-muted-foreground hover:text-foreground hover:border-gold/50"
+              )}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
 
         {/* Testimonial Carousel */}
@@ -178,7 +258,7 @@ const JakdamTestimonialsSection = () => {
 
           {/* Dots Navigation */}
           <div className="flex justify-center gap-3 mt-8">
-            {testimonials.map((_, index) => (
+            {filteredTestimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleDotClick(index)}

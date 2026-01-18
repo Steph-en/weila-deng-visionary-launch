@@ -5,6 +5,7 @@ import About from "@/pages/About";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
 import Team from "@/pages/Team";
+import News from "@/pages/News";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import PageTransition from "./PageTransition";
@@ -57,6 +58,14 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <Team />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/news"
+            element={
+              <PageTransition>
+                <News />
               </PageTransition>
             }
           />
