@@ -205,14 +205,14 @@ const JakdamTestimonialsSection = () => {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/80 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-all duration-300 hover:scale-110 hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/80 border border-border items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-all duration-300 hover:scale-110 hidden md:flex"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/80 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-all duration-300 hover:scale-110 hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/80 border border-border items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-all duration-300 hover:scale-110 hidden md:flex"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5" />
