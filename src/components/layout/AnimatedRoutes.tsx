@@ -53,7 +53,7 @@ const AnimatedRoutes = () => {
               </PageTransition>
             }
           />
-          {/* <Route
+          <Route
             path="/team"
             element={
               <PageTransition>
@@ -68,7 +68,7 @@ const AnimatedRoutes = () => {
                 <News />
               </PageTransition>
             }
-          /> */}
+          />
           <Route
             path="/contact"
             element={
