@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logoImage from "@/assets/Weila-Deng-Logo.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,7 +54,7 @@ const Header = () => {
                 isScrolled ? "text-sm" : "text-lg"
               )}
             >
-              W
+              <img src={logoImage} alt="Weila Deng Logo" />
             </span>
           </div>
           <div className="hidden sm:block overflow-hidden">

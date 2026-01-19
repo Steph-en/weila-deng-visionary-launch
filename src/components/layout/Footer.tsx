@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, Linkedin, Twitter, Facebook } from "lucide-react";
+import logoImage from "@/assets/Weila-Deng-Logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,9 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold">
-                <span className="font-serif text-xl font-semibold text-navy">W</span>
+                <span className="font-serif text-xl font-semibold text-navy">
+                  <img src={logoImage} alt="Weila Deng Logo" />
+                  </span>
               </div>
               <span className="font-serif text-2xl font-medium">Weila Deng</span>
             </div>
