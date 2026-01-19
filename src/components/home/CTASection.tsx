@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import diplomaticMeeting from "@/assets/diplomatic-meeting.jpg";
+import diplomaticMeeting from "@/assets/diplomatic-meeting2.png";
 
 const CTASection = () => {
   const [isVisible, setIsVisible] = useState(false);

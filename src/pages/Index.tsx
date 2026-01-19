@@ -7,8 +7,8 @@ import ImpactSection from "@/components/home/ImpactSection";
 import MissionSection from "@/components/home/MissionSection";
 import StatsSection from "@/components/home/StatsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
-import JakdamTestimonialsSection from "@/components/home/JakdamTestimonialsSection";
-import TimelineSection from "@/components/home/TimelineSection";
+// import JakdamTestimonialsSection from "@/components/home/JakdamTestimonialsSection";
+// import TimelineSection from "@/components/home/TimelineSection";
 import CTASection from "@/components/home/CTASection";
 
 const Index = () => {
@@ -22,8 +22,8 @@ const Index = () => {
         <ImpactSection />
         <MissionSection />
         <StatsSection />
-        {/* <TestimonialsSection /> */}
-        <JakdamTestimonialsSection />
+        <TestimonialsSection />
+        {/* <JakdamTestimonialsSection /> */}
         {/* <TimelineSection /> */}
         <CTASection />
       </main>

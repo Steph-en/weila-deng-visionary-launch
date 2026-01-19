@@ -45,7 +45,7 @@ const TestimonialsSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);

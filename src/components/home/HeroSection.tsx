@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroPortrait from "@/assets/hero-portrait.jpg";
+// import heroPortrait from "@/assets/hero-portrait.jpg";
+import heroPortrait from "@/assets/hero-portrait2.png";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {

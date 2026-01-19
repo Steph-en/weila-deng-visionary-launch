@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Briefcase, Globe, Heart, BookOpen, Utensils, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
-import aboutPortrait from "@/assets/about-portrait.jpg";
-import speakingEvent from "@/assets/speaking-event.jpg";
+import aboutPortrait from "@/assets/about-portrait2.png";
+import speakingEvent from "@/assets/speaking-event2.png";
 import solarProject from "@/assets/solar-project.jpg";
 import manufacturing from "@/assets/manufacturing.jpg";
 
@@ -152,7 +152,7 @@ const About = () => {
                   <img 
                     src={aboutPortrait} 
                     alt="Madam Weila Deng" 
-                    className="w-full h-auto object-cover"
+                    className="w-full h-[45vh] object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent" />
                 </div>

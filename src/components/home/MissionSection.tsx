@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Globe, Users, Briefcase, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import speakingEvent from "@/assets/speaking-event.jpg";
-import partnershipSigning from "@/assets/partnership-signing.jpg";
+import speakingEvent from "@/assets/speaking-event2.png";
+import partnershipSigning from "@/assets/partnership-signing2.png";
 
 const pillars = [
   {
