@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import solarProject from "@/assets/solar-project.jpg";
-import leadershipMeeting from "@/assets/leadership-meeting.jpg";
+import leadershipMeeting from "@/assets/leadership-meeting2.png";
 
 const achievements = [
   {
@@ -114,6 +114,22 @@ const LeadershipSection = () => {
                 </div>
               </div>
             ))}
+            {/* Small Feature Image */}
+            <div className={cn(
+              "relative rounded-lg overflow-hidden h-48 opacity-0",
+              isVisible && "animate-fade-in"
+            )} style={{ animationDelay: '0.8s' }}>
+              <img 
+                src={solarProject} 
+                alt="Solar project in Africa" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <span className="text-primary-foreground text-sm font-medium">$40M Solar Project</span>
+                <p className="text-primary-foreground/70 text-xs">Sierra Leone</p>
+              </div>
+            </div>
           </div>
 
           {/* Center Column - Featured Image */}
@@ -121,11 +137,11 @@ const LeadershipSection = () => {
             "lg:col-span-4 relative opacity-0",
             isVisible && "animate-fade-in"
           )} style={{ animationDelay: '0.5s' }}>
-            <div className="relative h-full min-h-[400px] rounded-lg overflow-hidden group">
+            <div className="relative h-[75%] min-h-[400px] rounded-lg overflow-hidden group">
               <img 
                 src={leadershipMeeting} 
                 alt="Leadership meeting" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-[87vh] object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
               
@@ -172,23 +188,6 @@ const LeadershipSection = () => {
                 </div>
               </div>
             ))}
-
-            {/* Small Feature Image */}
-            <div className={cn(
-              "relative rounded-lg overflow-hidden h-48 opacity-0",
-              isVisible && "animate-fade-in"
-            )} style={{ animationDelay: '0.8s' }}>
-              <img 
-                src={solarProject} 
-                alt="Solar project in Africa" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-primary-foreground text-sm font-medium">$40M Solar Project</span>
-                <p className="text-primary-foreground/70 text-xs">Sierra Leone</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
