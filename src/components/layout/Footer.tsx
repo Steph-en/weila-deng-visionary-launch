@@ -100,13 +100,13 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-primary-foreground/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <p className="text-primary-foreground/60 text-sm">
               © {currentYear} Weila Deng. All Rights Reserved.
             </p>
-            <p className="text-primary-foreground/40 text-sm">
+            {/* <p className="text-primary-foreground/40 text-sm">
               Designed with purpose and passion
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
