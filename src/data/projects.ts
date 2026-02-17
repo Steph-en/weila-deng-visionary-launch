@@ -2,16 +2,26 @@ import maritimeAuthority from "@/assets/projects/maritime-authority.jpg";
 import maritimeProgress from "@/assets/projects/maritime-progress.jpg";
 import maritimeInterior from "@/assets/projects/maritime-interior.jpg";
 import espHeights from "@/assets/projects/esp-heights.jpg";
-import espRooftop from "@/assets/projects/esp-rooftop.jpg";
-import espInterior from "@/assets/projects/esp-interior.jpg";
+import AA1 from "@/assets/projects/aa3436.jpg";
+import AA2 from "@/assets/projects/aa3278.jpg";
+import AA3 from "@/assets/projects/aa3570.jpg";
+import AA4 from "@/assets/projects/aa3781.jpg";
+import AA5 from "@/assets/projects/aa3909.jpg";
+import AA6 from "@/assets/projects/aa378.jpg";
 import affordableHousing from "@/assets/projects/affordable-housing.jpg";
 import housingAerial from "@/assets/projects/housing-aerial.jpg";
 import highwayConstruction from "@/assets/projects/highway-construction.jpg";
-import highwayProgress from "@/assets/projects/highway-progress.jpg";
+import highwayProgress1 from "@/assets/projects/highway-progress1.jpg";
+import highwayProgress2 from "@/assets/projects/highway-progress2.jpg";
+import highwayProgress3 from "@/assets/projects/highway-progress3.jpg";
+import highwayProgress4 from "@/assets/projects/highway-progress4.jpg";
 import irrigationProject from "@/assets/projects/irrigation-project.jpg";
-import irrigationCanal from "@/assets/projects/irrigation-canal.jpg";
+import irrigationCanal1 from "@/assets/projects/irrigation-canal1.jpg";
+import irrigationCanal2 from "@/assets/projects/irrigation-canal2.jpg";
+import irrigationCanal3 from "@/assets/projects/irrigation-canal3.jpg";
+import irrigationCanal4 from "@/assets/projects/irrigation-canal4.jpg";
 import residentialApartments from "@/assets/projects/residential-apartments.jpg";
-import apartmentsExterior from "@/assets/projects/apartments-exterior.jpg";
+import residentialApartments2 from "@/assets/projects/residential-apartments2.jpg";
 
 export interface Project {
   id: string;
@@ -92,7 +102,7 @@ export const featuredProjects: Project[] = [
       { label: "Unit Sizes", value: "1-4 Bedrooms" },
       { label: "Amenities", value: "Pool, Gym, Spa" },
     ],
-    gallery: [espHeights, espRooftop, espInterior],
+    gallery: [AA5, AA1, AA2, AA3, AA4, AA6],
     year: "2021",
     client: "Private Development",
     status: "Completed",
@@ -146,7 +156,7 @@ export const featuredProjects: Project[] = [
       { label: "Bridges", value: "3 Major Bridges" },
       { label: "Design Speed", value: "100 km/h" },
     ],
-    gallery: [highwayConstruction, highwayProgress],
+    gallery: [highwayProgress1, highwayProgress2, highwayProgress3, highwayProgress4],
     year: "2023",
     client: "Ministry of Roads & Highways",
     status: "Completed",
@@ -173,7 +183,7 @@ export const featuredProjects: Project[] = [
       { label: "Pump Capacity", value: "5,000 m³/hour" },
       { label: "Beneficiaries", value: "10,000+ Farmers" },
     ],
-    gallery: [irrigationProject, irrigationCanal],
+    gallery: [irrigationCanal2, irrigationCanal3, irrigationCanal1, irrigationCanal4],
     year: "2019",
     client: "Ghana Irrigation Development Authority",
     status: "Completed",
@@ -200,7 +210,7 @@ export const featuredProjects: Project[] = [
       { label: "Unit Types", value: "Studio to 4BR" },
       { label: "Occupancy Rate", value: "95%" },
     ],
-    gallery: [residentialApartments, apartmentsExterior],
+    gallery: [residentialApartments, residentialApartments2],
     year: "2018-2023",
     client: "Various Private Clients",
     status: "Completed",
