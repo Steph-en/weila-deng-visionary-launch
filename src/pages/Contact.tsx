@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion, useScroll, useTransform } from "framer-motion";
 import contactHero from "@/assets/contact-hero.jpg";
 import { supabase } from "@/integrations/supabase/client";
+import ContactSuccessModal from "@/components/contact/ContactSuccessModal";
 
 const Contact = () => {
   const [heroVisible, setHeroVisible] = useState(false);
@@ -20,11 +21,13 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
   const { toast } = useToast();
 
   const heroRef = useRef<HTMLElement>(null);
+  const contactFormRef = useRef<HTMLDivElement>(null);
 
-  // Parallax for hero section
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -37,6 +40,12 @@ const Contact = () => {
 
   useEffect(() => {
     setHeroVisible(true);
+    // Auto-scroll to contact form if hash is #contact
+    if (window.location.hash === "#contact" && contactFormRef.current) {
+      setTimeout(() => {
+        contactFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 500);
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -55,10 +64,8 @@ const Contact = () => {
 
       if (error) throw error;
 
-      toast({
-        title: "Message Sent Successfully!",
-        description: "Thank you for reaching out. We'll get back to you within 24-48 hours."
-      });
+      setSubmittedName(formData.name);
+      setShowSuccessModal(true);
       
       setFormData({
         name: "",
@@ -91,7 +98,6 @@ const Contact = () => {
 
       {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-        {/* Background Image with Parallax */}
         <motion.div 
           className="absolute inset-0"
           style={{ y: backgroundY, scale: backgroundScale }}
@@ -104,7 +110,6 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
         </motion.div>
 
-        {/* Floating decorative elements with parallax */}
         <motion.div 
           className="absolute top-1/4 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl"
           style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]) }}
@@ -150,7 +155,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background" ref={contactFormRef} id="contact">
         <div className="container-elegant">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
@@ -306,6 +311,12 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      <ContactSuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        name={submittedName}
+      />
 
       <Footer />
     </div>

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { featuredProjects, keyAreas, notableBuildings, highwayProjects, waterProjects } from "@/data/projects";
+import { featuredProjects, keyAreas, notableBuildings, highwayProjects, waterProjects, regions } from "@/data/projects";
 
 const areaIcons = {
   construction: Building2,
@@ -23,6 +23,7 @@ const Projects = () => {
   const [areasVisible, setAreasVisible] = useState(false);
   const [projectsVisible, setProjectsVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [activeRegion, setActiveRegion] = useState("all");
   const heroRef = useRef<HTMLDivElement>(null);
   const areasRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -36,9 +37,15 @@ const Projects = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === "all") return featuredProjects;
-    return featuredProjects.filter((project) => project.categorySlug === activeFilter);
-  }, [activeFilter]);
+    let result = featuredProjects;
+    if (activeFilter !== "all") {
+      result = result.filter((project) => project.categorySlug === activeFilter);
+    }
+    if (activeRegion !== "all") {
+      result = result.filter((project) => project.region === activeRegion);
+    }
+    return result;
+  }, [activeFilter, activeRegion]);
 
   useEffect(() => {
     setHeroVisible(true);
@@ -219,6 +226,23 @@ const Projects = () => {
               activeFilter={activeFilter}
               onFilterChange={setActiveFilter}
             />
+            {/* Region Filter */}
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {regions.map((region) => (
+                <button
+                  key={region.slug}
+                  onClick={() => setActiveRegion(region.slug)}
+                  className={cn(
+                    "px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border",
+                    activeRegion === region.slug
+                      ? "bg-navy text-primary-foreground border-navy"
+                      : "text-muted-foreground border-border hover:border-gold/50 hover:text-foreground"
+                  )}
+                >
+                  {region.label}
+                </button>
+              ))}
+            </div>
           </motion.div>
 
           {/* Projects Grid */}

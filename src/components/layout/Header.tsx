@@ -21,9 +21,8 @@ const Header = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
     { name: "Projects", path: "/projects" },
-    // { name: "Team", path: "/team" },
-    // { name: "News", path: "/news" },
     { name: "Contact", path: "/contact" },
   ];
 
