@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { featuredProjects, keyAreas, notableBuildings, highwayProjects, waterProjects, regions } from "@/data/projects";
+import { featuredProjects, keyAreas, notableBuildings, highwayProjects, waterProjects,  } from "@/data/projects";
 
 const areaIcons = {
   construction: Building2,
@@ -41,9 +41,9 @@ const Projects = () => {
     if (activeFilter !== "all") {
       result = result.filter((project) => project.categorySlug === activeFilter);
     }
-    if (activeRegion !== "all") {
-      result = result.filter((project) => project.region === activeRegion);
-    }
+    // if (activeRegion !== "all") {
+    //   result = result.filter((project) => project.region === activeRegion);
+    // }
     return result;
   }, [activeFilter, activeRegion]);
 
@@ -227,7 +227,7 @@ const Projects = () => {
               onFilterChange={setActiveFilter}
             />
             {/* Region Filter */}
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {/* <div className="mt-4 flex flex-wrap justify-center gap-2">
               {regions.map((region) => (
                 <button
                   key={region.slug}
@@ -242,7 +242,7 @@ const Projects = () => {
                   {region.label}
                 </button>
               ))}
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Projects Grid */}

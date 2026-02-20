@@ -291,7 +291,7 @@ const Contact = () => {
               </div>
 
               {/* Newsletter */}
-              <div className="mt-8 p-8 border border-border rounded-lg">
+              {/* <div className="mt-8 p-8 border border-border rounded-lg">
                 <h3 className="font-serif text-xl text-foreground mb-2">Stay Updated</h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Subscribe to the newsletter for insights and updates.
@@ -306,7 +306,7 @@ const Contact = () => {
                     Subscribe
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

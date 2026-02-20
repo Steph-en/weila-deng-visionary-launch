@@ -29,7 +29,7 @@ export interface Project {
   category: string;
   categorySlug: string;
   location: string;
-  region: string;
+  // region: string;
   image: string;
   description: string;
   fullDescription: string;
@@ -48,13 +48,13 @@ export interface Project {
   }[];
 }
 
-export const regions = [
-  { slug: "all", label: "All Regions" },
-  { slug: "greater-accra", label: "Greater Accra" },
-  { slug: "ashanti", label: "Ashanti" },
-  { slug: "eastern", label: "Eastern" },
-  { slug: "various", label: "Various/Multi-Region" },
-];
+// export const regions = [
+//   { slug: "all", label: "All Regions" },
+//   { slug: "greater-accra", label: "Greater Accra" },
+//   { slug: "ashanti", label: "Ashanti" },
+//   { slug: "eastern", label: "Eastern" },
+//   { slug: "various", label: "Various/Multi-Region" },
+// ];
 
 export const categories = [
   { slug: "all", label: "All Projects" },
@@ -72,7 +72,7 @@ export const featuredProjects: Project[] = [
     category: "Commercial Building",
     categorySlug: "commercial",
     location: "Accra, Ghana",
-    region: "greater-accra",
+    // region: "greater-accra",
     image: maritimeAuthority,
     description: "A landmark office complex serving as the headquarters for Ghana's maritime regulatory body.",
     fullDescription: "The Ghana Maritime Authority Head Office stands as a testament to modern African architecture and Jakdam Group's commitment to excellence. This landmark office complex serves as the headquarters for Ghana's maritime regulatory body, featuring state-of-the-art facilities, sustainable design principles, and a commanding presence in Accra's business district. The building incorporates advanced energy-efficient systems and provides a world-class working environment for maritime professionals.",
@@ -104,7 +104,6 @@ export const featuredProjects: Project[] = [
     category: "Residential Tower",
     categorySlug: "residential",
     location: "Accra, Ghana",
-    region: "greater-accra",
     image: espHeights,
     description: "Premium high-rise residential towers offering luxury living spaces with modern amenities.",
     fullDescription: "ESP Heights I & II represent the pinnacle of luxury residential living in Accra. These twin towers offer discerning residents an unparalleled lifestyle experience with panoramic city views, premium finishes, and world-class amenities. Each unit is thoughtfully designed to maximize space and natural light, while common areas include a rooftop infinity pool, fitness center, and landscaped gardens.",
@@ -136,7 +135,6 @@ export const featuredProjects: Project[] = [
     category: "Residential Development",
     categorySlug: "residential",
     location: "Ghana",
-    region: "ashanti",
     image: affordableHousing,
     description: "A comprehensive housing initiative providing quality homes for Ghanaian families.",
     fullDescription: "This 64-unit affordable housing project demonstrates Jakdam Group's commitment to addressing Ghana's housing needs. The development provides quality, modern homes at accessible price points, enabling more Ghanaian families to achieve homeownership. Each unit features durable construction, functional layouts, and access to community amenities including playgrounds and green spaces.",
@@ -168,7 +166,6 @@ export const featuredProjects: Project[] = [
     category: "Highway Construction",
     categorySlug: "highway",
     location: "Ghana",
-    region: "ashanti",
     image: highwayConstruction,
     description: "Major highway infrastructure connecting communities and enabling economic growth.",
     fullDescription: "The Brofoyedur – Akenkansu Highway is a critical infrastructure project that enhances connectivity between rural communities and urban centers. This multi-lane highway features modern engineering standards, proper drainage systems, and safety features. The project significantly reduces travel times and transportation costs, unlocking economic opportunities for communities along the corridor.",
@@ -200,7 +197,6 @@ export const featuredProjects: Project[] = [
     category: "Water Resources",
     categorySlug: "water-resources",
     location: "Kpong, Ghana",
-    region: "eastern",
     image: irrigationProject,
     description: "Large-scale irrigation infrastructure supporting agricultural development in the region.",
     fullDescription: "The Kpong Left Bank Irrigation Project is a transformative agricultural infrastructure initiative that brings reliable water access to thousands of hectares of farmland. The project includes a comprehensive network of canals, pumping stations, and distribution systems that enable year-round farming and significantly boost agricultural productivity in the region.",
@@ -232,7 +228,6 @@ export const featuredProjects: Project[] = [
     category: "Residential Complex",
     categorySlug: "residential",
     location: "Various Locations",
-    region: "various",
     image: residentialApartments,
     description: "Multiple residential apartment complexes delivering quality housing solutions.",
     fullDescription: "Jakdam Group has delivered multiple residential apartment complexes across Ghana, each designed to meet the diverse housing needs of urban populations. These developments feature modern architectural design, quality construction materials, and thoughtful amenities that enhance residents' quality of life.",
