@@ -112,6 +112,8 @@ const HeroSection = () => {
           src={heroBg} 
           alt="Infrastructure development" 
           className="w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
       </motion.div>
@@ -287,6 +289,8 @@ const HeroSection = () => {
                   src={heroPortrait} 
                   alt="Madam Weila Deng" 
                   className="w-full h-auto object-cover aspect-[4/5]"
+                  loading="eager"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
               </div>
