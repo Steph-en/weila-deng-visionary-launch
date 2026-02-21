@@ -235,7 +235,21 @@ const HeroSection = () => {
               variants={itemVariants}
             >
               <Link to="/about">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  animate={{
+                    boxShadow: [
+                      "0 0 0 0 hsla(var(--gold), 0)",
+                      "0 0 0 8px hsla(var(--gold), 0.15)",
+                      "0 0 0 0 hsla(var(--gold), 0)",
+                    ],
+                  }}
+                  transition={{
+                    boxShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 2 },
+                  }}
+                  className="rounded-lg"
+                >
                   <Button variant="hero" size="xl" className="group">
                     Learn More
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
