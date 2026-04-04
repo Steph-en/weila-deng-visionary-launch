@@ -3,13 +3,15 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, GraduationCap, Briefcase, Globe, Heart, BookOpen, Utensils, Waves } from "lucide-react";
+import { ArrowRight, GraduationCap, BookOpen, Utensils, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import aboutPortrait from "@/assets/about-portrait2.png";
 import speakingEvent from "@/assets/speaking-event2.png";
 import solarProject from "@/assets/solar-project.jpg";
 import manufacturing from "@/assets/manufacturing.jpg";
+import suiming from "@/assets/Suiming-Group.jpg";
+import speaking from "@/assets/speaking.jpg";
 
 const About = () => {
   const [heroVisible, setHeroVisible] = useState(false);
@@ -61,13 +63,13 @@ const About = () => {
       year: "2003",
       title: "CEO of Suiming Group",
       description: "Transformed a local enterprise into an internationally recognized high-tech company.",
-      image: manufacturing,
+      image: suiming,
     },
     {
       year: "2016",
       title: "CEO of Jakdam Group Limited",
       description: "Expanded leadership to a diversified conglomerate with capabilities in construction and hydropower.",
-      image: speakingEvent,
+      image: speaking,
     },
     {
       year: "2016-2018",

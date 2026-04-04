@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const Index = lazy(() => import("@/pages/Index"));
 const About = lazy(() => import("@/pages/About"));
 const Services = lazy(() => import("@/pages/Services"));
+const Achievements = lazy(() => import("@/pages/Achievements"));
 const Projects = lazy(() => import("@/pages/Projects"));
 const ProjectDetail = lazy(() => import("@/pages/ProjectDetail"));
 const Team = lazy(() => import("@/pages/Team"));
@@ -40,6 +41,7 @@ const AnimatedRoutes = () => {
             <Route path="/" element={<PageTransition><Index /></PageTransition>} />
             <Route path="/about" element={<PageTransition><About /></PageTransition>} />
             <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+            <Route path="/achievements" element={<PageTransition><Achievements /></PageTransition>} />
             <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
             <Route path="/projects/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
             <Route path="/team" element={<PageTransition><Team /></PageTransition>} />
