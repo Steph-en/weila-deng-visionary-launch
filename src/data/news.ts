@@ -5,7 +5,7 @@ export interface NewsArticle {
   content: string;
   category: 'announcement' | 'project-update' | 'industry-insight';
   date: string;
-  author: string;
+  author?: string;
   readTime: string;
   featured: boolean;
   image?: string;
@@ -23,6 +23,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jakdam Communications',
     readTime: '4 min read',
     featured: true,
+    image: 'src/assets/PHOTO-2026-04-10-18-18-38.jpg'
   },
   {
     id: 'maritime-headquarters-completion',
@@ -34,6 +35,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jakdam Communications',
     readTime: '4 min read',
     featured: true,
+    image: 'src/assets/projects/maritime-interior.jpg'
   },
   {
     id: 'esp-heights-milestone',
@@ -45,6 +47,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Project Management Team',
     readTime: '3 min read',
     featured: true,
+    image: 'src/assets/projects/esp-heights.jpg'
   },
   {
     id: 'sustainable-construction-trends',
