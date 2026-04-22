@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { newsArticles, newsCategories, type NewsArticle } from "@/data/news";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ArticleModal from "@/components/news/ArticleModal";
 
 const categoryIcons = {
   'announcement': Megaphone,
@@ -12,7 +13,15 @@ const categoryIcons = {
   'industry-insight': Newspaper,
 };
 
-const NewsCard = ({ article, index }: { article: NewsArticle; index: number }) => {
+const NewsCard = ({
+  article,
+  index,
+  onOpen,
+}: {
+  article: NewsArticle;
+  index: number;
+  onOpen: (article: NewsArticle) => void;
+}) => {
   const Icon = categoryIcons[article.category];
   
   return (
@@ -61,7 +70,10 @@ const NewsCard = ({ article, index }: { article: NewsArticle; index: number }) =
         </div>
 
         {/* Read More */}
-        <button className="inline-flex items-center gap-2 text-sm font-medium text-gold group-hover:gap-3 transition-all duration-300">
+        <button
+          onClick={() => onOpen(article)}
+          className="inline-flex items-center gap-2 text-sm font-medium text-gold group-hover:gap-3 transition-all duration-300"
+        >
           Read More
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -70,7 +82,13 @@ const NewsCard = ({ article, index }: { article: NewsArticle; index: number }) =
   );
 };
 
-const FeaturedNews = ({ article }: { article: NewsArticle }) => {
+const FeaturedNews = ({
+  article,
+  onOpen,
+}: {
+  article: NewsArticle;
+  onOpen: (article: NewsArticle) => void;
+}) => {
   const Icon = categoryIcons[article.category];
   
   return (
@@ -118,7 +136,10 @@ const FeaturedNews = ({ article }: { article: NewsArticle }) => {
         </div>
 
         {/* Read More */}
-        <button className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-navy font-medium rounded-lg hover:bg-gold/90 transition-colors group-hover:gap-3 transition-all duration-300">
+        <button
+          onClick={() => onOpen(article)}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-navy font-medium rounded-lg hover:bg-gold/90 transition-colors group-hover:gap-3 transition-all duration-300"
+        >
           Read Full Article
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -130,7 +151,14 @@ const FeaturedNews = ({ article }: { article: NewsArticle }) => {
 const News = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const openArticle = (article: NewsArticle) => {
+    setSelectedArticle(article);
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -181,7 +209,7 @@ const News = () => {
             <div className="container-elegant">
               <div className="grid md:grid-cols-2 gap-6">
                 {featuredArticles.map((article) => (
-                  <FeaturedNews key={article.id} article={article} />
+                  <FeaturedNews key={article.id} article={article} onOpen={openArticle} />
                 ))}
               </div>
             </div>
@@ -216,7 +244,7 @@ const News = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <AnimatePresence mode="popLayout">
                 {regularArticles.map((article, index) => (
-                  <NewsCard key={article.id} article={article} index={index} />
+                  <NewsCard key={article.id} article={article} index={index} onOpen={openArticle} />
                 ))}
               </AnimatePresence>
             </div>
@@ -231,6 +259,11 @@ const News = () => {
         </section>
       </main>
       <Footer />
+      <ArticleModal
+        article={selectedArticle}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </>
   );
 };
