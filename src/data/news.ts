@@ -39,7 +39,7 @@ export const newsArticles: NewsArticle[] = [
   },
   {
     id: 'esp-heights-milestone',
-    title: 'ESP Heights Residential Tower Reaches 80% Completion',
+    title: 'ESP Heights Residential Tower Reaches Completion',
     excerpt: 'Construction progress on the luxury 12-story residential development continues ahead of schedule.',
     content: 'The ESP Heights project in Accra has reached a significant milestone with 80% of construction now complete. The luxury residential tower will offer premium living spaces with panoramic city views.',
     category: 'project-update',
@@ -47,7 +47,12 @@ export const newsArticles: NewsArticle[] = [
     author: 'Project Management Team',
     readTime: '3 min read',
     featured: true,
-    image: 'src/assets/projects/esp-heights.jpg'
+    image: 'src/assets/projects/esp-heights.jpg',
+    images: [
+      'src/assets/projects/esp-heights.jpg',
+      'src/assets/projects/aa378.jpg',
+      'src/assets/projects/aa3909.jpg',
+    ],
   },
   {
     id: 'sustainable-construction-trends',
