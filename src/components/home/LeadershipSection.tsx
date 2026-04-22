@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Lightbulb, Globe, Building2, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import solarProject from "@/assets/solar-project.jpg";
 import leadershipMeeting from "@/assets/leadership-meeting2.png";

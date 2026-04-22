@@ -12,6 +12,17 @@ export interface NewsArticle {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: 'chad-strengthening-solar-lighting',
+    title: 'Chad is considering strengthening solar lighting.',
+    excerpt: 'The Minister of Water and Energy, Basali Kanabe Marcelin: Thursday, April 09, 2026, in N\'Djamena, received a delegation from the Chinese Suiming Group specialised in solar energy, headed by its Director General Weila Deng , and with the participation of a number of ministry officials.',
+    content: 'The meeting came within the framework of a call for offers for the supply of 2,0000 solar-powered street lighting lamps, where the company reviewed its experience, especially in the implementation of major street lighting projects in sub-Saharan Africa, in addition to owning a factory specialised in high-quality solar energy equipment. The Minister expressed his satisfaction with the level of the offer, praising the proposed technical specifications, and stressing the continuation of consultations with the technical teams to study opportunities for cooperation and promote the use of clean energy in the country.',
+    category: 'announcement',
+    date: '2026-04-09',
+    author: 'Jakdam Communications',
+    readTime: '4 min read',
+    featured: true,
+  },
+  {
     id: 'maritime-headquarters-completion',
     title: 'Jakdam Group Completes Ghana Maritime Authority Headquarters',
     excerpt: 'The state-of-the-art facility represents a major milestone in our construction portfolio, featuring cutting-edge sustainable design.',
