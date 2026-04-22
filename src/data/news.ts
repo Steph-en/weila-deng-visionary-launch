@@ -8,6 +8,8 @@ export interface NewsArticle {
   author: string;
   readTime: string;
   featured: boolean;
+  image?: string;
+  images?: string[];
 }
 
 export const newsArticles: NewsArticle[] = [
