@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, User, ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
+import { Calendar, Clock, User, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -50,64 +50,58 @@ const ArticleModal = ({ article, open, onOpenChange }: ArticleModalProps) => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
             >
-              {/* Image / Carousel */}
-              <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
-                {gallery.length > 0 ? (
-                  <>
-                    {imgLoading && (
-                      <div className="absolute inset-0 animate-pulse bg-muted" />
-                    )}
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={gallery[activeImage]}
-                        src={gallery[activeImage]}
-                        alt={article.title}
-                        onLoad={() => setImgLoading(false)}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full h-full object-cover"
-                      />
-                    </AnimatePresence>
-                    {gallery.length > 1 && (
-                      <>
-                        <button
-                          onClick={prev}
-                          aria-label="Previous image"
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
-                        >
-                          <ChevronLeft className="w-5 h-5 text-foreground" />
-                        </button>
-                        <button
-                          onClick={next}
-                          aria-label="Next image"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
-                        >
-                          <ChevronRight className="w-5 h-5 text-foreground" />
-                        </button>
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-                          {gallery.map((_, i) => (
-                            <button
-                              key={i}
-                              onClick={() => setActiveImage(i)}
-                              aria-label={`Go to image ${i + 1}`}
-                              className={cn(
-                                "h-1.5 rounded-full transition-all",
-                                i === activeImage ? "w-6 bg-gold" : "w-1.5 bg-background/70"
-                              )}
-                            />
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-navy/10 to-gold/10">
-                    <ImageIcon className="w-12 h-12 text-muted-foreground/40" />
-                  </div>
-                )}
-              </div>
+              {/* Image / Carousel — only render if article has images */}
+              {gallery.length > 0 && (
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  {imgLoading && (
+                    <div className="absolute inset-0 animate-pulse bg-muted" />
+                  )}
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={gallery[activeImage]}
+                      src={gallery[activeImage]}
+                      alt={article.title}
+                      onLoad={() => setImgLoading(false)}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full object-cover"
+                    />
+                  </AnimatePresence>
+                  {gallery.length > 1 && (
+                    <>
+                      <button
+                        onClick={prev}
+                        aria-label="Previous image"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
+                      >
+                        <ChevronLeft className="w-5 h-5 text-foreground" />
+                      </button>
+                      <button
+                        onClick={next}
+                        aria-label="Next image"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
+                      >
+                        <ChevronRight className="w-5 h-5 text-foreground" />
+                      </button>
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                        {gallery.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setActiveImage(i)}
+                            aria-label={`Go to image ${i + 1}`}
+                            className={cn(
+                              "h-1.5 rounded-full transition-all",
+                              i === activeImage ? "w-6 bg-gold" : "w-1.5 bg-background/70"
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
 
               <ScrollArea className="max-h-[60vh]">
                 <div className="p-6 md:p-8">
