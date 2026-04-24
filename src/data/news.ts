@@ -1,3 +1,13 @@
+import Chad from '@/assets/PHOTO-2026-04-10-18-18-38.jpg';
+import Maritime from "@/assets/projects/maritime-authority.jpg";
+import ESP1 from "@/assets/projects/esp-heights.jpg";
+import ESP2 from "@/assets/projects/aa378.jpg";
+import ESP3 from "@/assets/projects/aa3909.jpg";
+import ESP4 from "@/assets/projects/aa3278.jpg";
+import ESP5 from "@/assets/projects/aa3436.jpg";
+import ESP6 from "@/assets/projects/aa3570.jpg";
+import ESP7 from "@/assets/projects/aa3781.jpg";
+
 export interface NewsArticle {
   id: string;
   title: string;
@@ -23,7 +33,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jakdam Communications',
     readTime: '4 min read',
     featured: true,
-    image: 'src/assets/PHOTO-2026-04-10-18-18-38.jpg'
+    image: Chad
   },
   {
     id: 'maritime-headquarters-completion',
@@ -35,7 +45,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jakdam Communications',
     readTime: '4 min read',
     featured: true,
-    image: 'src/assets/projects/maritime-interior.jpg'
+    image: Maritime
   },
   {
     id: 'esp-heights-milestone',
@@ -47,11 +57,15 @@ export const newsArticles: NewsArticle[] = [
     author: 'Project Management Team',
     readTime: '3 min read',
     featured: true,
-    image: 'src/assets/projects/esp-heights.jpg',
+    image: ESP1,
     images: [
-      'src/assets/projects/esp-heights.jpg',
-      'src/assets/projects/aa378.jpg',
-      'src/assets/projects/aa3909.jpg',
+      ESP1,
+      ESP2,
+      ESP3,
+      ESP4,
+      ESP5,
+      ESP6,
+      ESP7
     ],
   },
   {
