@@ -50,8 +50,8 @@ export const newsArticles: NewsArticle[] = [
   {
     id: 'esp-heights-milestone',
     title: 'ESP Heights Residential Tower Reaches Completion',
-    excerpt: 'Construction progress on the luxury 12-story residential development continues ahead of schedule.',
-    content: 'The ESP Heights project in Accra has reached a significant milestone with 80% of construction now complete. The luxury residential tower will offer premium living spaces with panoramic city views.',
+    excerpt: 'Construction of the luxury 12-story ESP Heights development in Accra is now complete, marking a major milestone for the project.',
+    content: ' The finished residential tower offers premium living spaces and panoramic city views, setting a new standard for upscale urban living. This achievement reflects Jakdam Group\'s dedication to quality and innovation in the real estate sector.',
     category: 'project-update',
     date: '2026-01-05',
     author: 'Project Management Team',
