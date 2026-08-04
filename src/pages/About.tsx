@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ESPSection from "@/components/shared/ESPSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, BookOpen, Utensils, Waves } from "lucide-react";
@@ -56,6 +57,13 @@ const About = () => {
     createObserver(philosophyRef, setPhilosophyVisible);
 
     return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 300);
+    }
   }, []);
 
   const milestones = [
@@ -298,6 +306,9 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* ESP International */}
+      <ESPSection />
 
       {/* Philosophy & Personal */}
       <section ref={philosophyRef} className="section-padding bg-primary text-primary-foreground">
