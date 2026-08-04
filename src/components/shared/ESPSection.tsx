@@ -1,6 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Building2, Hotel } from "lucide-react";
 import { cn } from "@/lib/utils";
+import espLogo from "@/assets/esp/esp-logo.png.asset.json";
+import espAirbnb from "@/assets/esp/esp-airbnb.png.asset.json";
+import espTower from "@/assets/esp/esp-tower.png.asset.json";
+import espVillasAerial from "@/assets/esp/esp-villas-aerial.png.asset.json";
+import espVilla from "@/assets/esp/esp-villa.png.asset.json";
+import espTownhouses from "@/assets/esp/esp-townhouses.png.asset.json";
+import espSitePlan from "@/assets/esp/esp-siteplan.png.asset.json";
+
+const featuredProjects = [
+  { src: espAirbnb.url, title: "ESP airBNB", detail: "Hospitality Development" },
+  { src: espTower.url, title: "ESP Residential Tower", detail: "Mixed-Use High-Rise" },
+  { src: espVilla.url, title: "Contemporary Villa", detail: "Luxury Residence" },
+  { src: espTownhouses.url, title: "Townhouse Collection", detail: "Gated Residences" },
+  { src: espVillasAerial.url, title: "Villa Estate", detail: "Aerial Masterplan" },
+  { src: espSitePlan.url, title: "Estate Site Plan", detail: "Architectural Layout" },
+];
 
 const ventures = [
   {
@@ -52,6 +68,22 @@ const ESPSection = () => {
           >
             Founder
           </span>
+          <div
+            className={cn(
+              "flex justify-center mb-8 opacity-0",
+              isVisible && "animate-fade-in"
+            )}
+            style={{ animationDelay: "0.05s" }}
+          >
+            <div className="rounded-xl bg-navy px-8 py-6 shadow-elevated">
+              <img
+                src={espLogo.url}
+                alt="ESP International logo"
+                loading="lazy"
+                className="h-14 md:h-16 w-auto object-contain"
+              />
+            </div>
+          </div>
           <h2
             id="esp-heading"
             className={cn(
@@ -131,6 +163,60 @@ const ESPSection = () => {
         >
           Explore the ventures associated with ESP International.
         </p>
+
+        {/* Featured Projects */}
+        <div className="mt-20 md:mt-24">
+          <div className="text-center mb-10 md:mb-14">
+            <span
+              className={cn(
+                "text-refined text-gold block mb-4 opacity-0",
+                isVisible && "animate-fade-in"
+              )}
+            >
+              Portfolio
+            </span>
+            <h3
+              className={cn(
+                "font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-6 opacity-0",
+                isVisible && "animate-fade-in"
+              )}
+              style={{ animationDelay: "0.1s" }}
+            >
+              Featured ESP Projects
+            </h3>
+            <div className="flex justify-center">
+              <div className="divider-gold-long" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProjects.map((project, index) => (
+              <figure
+                key={project.title}
+                className={cn(
+                  "group relative overflow-hidden rounded-xl border border-border bg-card opacity-0",
+                  isVisible && "animate-fade-in-up"
+                )}
+                style={{ animationDelay: `${0.15 + index * 0.08}s` }}
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                  <img
+                    src={project.src}
+                    alt={`${project.title} — ${project.detail} by ESP International`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <figcaption className="p-5">
+                  <h4 className="font-serif text-lg text-foreground group-hover:text-gold transition-colors duration-300">
+                    {project.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mt-1">{project.detail}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
