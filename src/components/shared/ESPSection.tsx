@@ -163,6 +163,60 @@ const ESPSection = () => {
         >
           Explore the ventures associated with ESP International.
         </p>
+
+        {/* Featured Projects */}
+        <div className="mt-20 md:mt-24">
+          <div className="text-center mb-10 md:mb-14">
+            <span
+              className={cn(
+                "text-refined text-gold block mb-4 opacity-0",
+                isVisible && "animate-fade-in"
+              )}
+            >
+              Portfolio
+            </span>
+            <h3
+              className={cn(
+                "font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-6 opacity-0",
+                isVisible && "animate-fade-in"
+              )}
+              style={{ animationDelay: "0.1s" }}
+            >
+              Featured ESP Projects
+            </h3>
+            <div className="flex justify-center">
+              <div className="divider-gold-long" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProjects.map((project, index) => (
+              <figure
+                key={project.title}
+                className={cn(
+                  "group relative overflow-hidden rounded-xl border border-border bg-card opacity-0",
+                  isVisible && "animate-fade-in-up"
+                )}
+                style={{ animationDelay: `${0.15 + index * 0.08}s` }}
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                  <img
+                    src={project.src}
+                    alt={`${project.title} — ${project.detail} by ESP International`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <figcaption className="p-5">
+                  <h4 className="font-serif text-lg text-foreground group-hover:text-gold transition-colors duration-300">
+                    {project.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mt-1">{project.detail}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
