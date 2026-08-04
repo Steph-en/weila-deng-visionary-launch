@@ -307,6 +307,9 @@ const About = () => {
         </div>
       </section>
 
+      {/* ESP International */}
+      <ESPSection />
+
       {/* Philosophy & Personal */}
       <section ref={philosophyRef} className="section-padding bg-primary text-primary-foreground">
         <div className="container-elegant">

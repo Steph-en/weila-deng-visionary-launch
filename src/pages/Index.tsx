@@ -5,6 +5,7 @@ import LeadershipSection from "@/components/home/LeadershipSection";
 import ValuesSection from "@/components/home/ValuesSection";
 import ImpactSection from "@/components/home/ImpactSection";
 import MissionSection from "@/components/home/MissionSection";
+import FounderCredential from "@/components/home/FounderCredential";
 import StatsSection from "@/components/home/StatsSection";
 // import TestimonialsSection from "@/components/home/TestimonialsSection";
 import JakdamTestimonialsSection from "@/components/home/JakdamTestimonialsSection";
@@ -21,6 +22,7 @@ const Index = () => {
         <ValuesSection />
         <ImpactSection />
         <MissionSection />
+        <FounderCredential />
         <StatsSection />
         {/* <TestimonialsSection /> */}
         <JakdamTestimonialsSection />
