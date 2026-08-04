@@ -1,6 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Building2, Hotel } from "lucide-react";
 import { cn } from "@/lib/utils";
+import espLogo from "@/assets/esp/esp-logo.png.asset.json";
+import espAirbnb from "@/assets/esp/esp-airbnb.png.asset.json";
+import espTower from "@/assets/esp/esp-tower.png.asset.json";
+import espVillasAerial from "@/assets/esp/esp-villas-aerial.png.asset.json";
+import espVilla from "@/assets/esp/esp-villa.png.asset.json";
+import espTownhouses from "@/assets/esp/esp-townhouses.png.asset.json";
+import espSitePlan from "@/assets/esp/esp-siteplan.png.asset.json";
+
+const featuredProjects = [
+  { src: espAirbnb.url, title: "ESP airBNB", detail: "Hospitality Development" },
+  { src: espTower.url, title: "ESP Residential Tower", detail: "Mixed-Use High-Rise" },
+  { src: espVilla.url, title: "Contemporary Villa", detail: "Luxury Residence" },
+  { src: espTownhouses.url, title: "Townhouse Collection", detail: "Gated Residences" },
+  { src: espVillasAerial.url, title: "Villa Estate", detail: "Aerial Masterplan" },
+  { src: espSitePlan.url, title: "Estate Site Plan", detail: "Architectural Layout" },
+];
 
 const ventures = [
   {
@@ -52,6 +68,22 @@ const ESPSection = () => {
           >
             Founder
           </span>
+          <div
+            className={cn(
+              "flex justify-center mb-8 opacity-0",
+              isVisible && "animate-fade-in"
+            )}
+            style={{ animationDelay: "0.05s" }}
+          >
+            <div className="rounded-xl bg-navy px-8 py-6 shadow-elevated">
+              <img
+                src={espLogo.url}
+                alt="ESP International logo"
+                loading="lazy"
+                className="h-14 md:h-16 w-auto object-contain"
+              />
+            </div>
+          </div>
           <h2
             id="esp-heading"
             className={cn(
