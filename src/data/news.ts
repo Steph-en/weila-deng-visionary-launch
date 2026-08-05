@@ -1,7 +1,6 @@
 import Chad from '@/assets/PHOTO-2026-04-10-18-18-38.jpg';
 import Maritime from "@/assets/projects/maritime-authority.jpg";
 import ESP1 from "@/assets/projects/esp-heights.jpg";
-import ESP2 from "@/assets/projects/aa378.jpg";
 import ESP3 from "@/assets/projects/aa3909.jpg";
 import ESP4 from "@/assets/projects/aa3278.jpg";
 import ESP5 from "@/assets/projects/aa3436.jpg";
@@ -60,7 +59,6 @@ export const newsArticles: NewsArticle[] = [
     image: ESP1,
     images: [
       ESP1,
-      ESP2,
       ESP3,
       ESP4,
       ESP5,

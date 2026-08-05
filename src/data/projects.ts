@@ -7,7 +7,6 @@ import AA2 from "@/assets/projects/aa3278.jpg";
 import AA3 from "@/assets/projects/aa3570.jpg";
 import AA4 from "@/assets/projects/aa3781.jpg";
 import AA5 from "@/assets/projects/aa3909.jpg";
-import AA6 from "@/assets/projects/aa378.jpg";
 import affordableHousing from "@/assets/projects/affordable-housing.jpg";
 import housingAerial from "@/assets/projects/housing-aerial.jpg";
 import highwayConstruction from "@/assets/projects/highway-construction.jpg";
@@ -120,7 +119,7 @@ export const featuredProjects: Project[] = [
       { label: "Unit Sizes", value: "1-4 Bedrooms" },
       { label: "Amenities", value: "Pool, Gym, Spa" },
     ],
-    gallery: [AA5, AA1, AA2, AA3, AA4, AA6],
+    gallery: [AA5, AA1, AA2, AA3, AA4],
     year: "2021",
     client: "Private Development",
     status: "Completed",
