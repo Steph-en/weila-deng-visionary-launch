@@ -154,7 +154,7 @@ const ESPSection = () => {
           ))}
         </div>
 
-        <p
+        {/* <p
           className={cn(
             "text-muted-foreground/80 text-sm text-center mt-10 max-w-2xl mx-auto opacity-0",
             isVisible && "animate-fade-in"
@@ -162,10 +162,10 @@ const ESPSection = () => {
           style={{ animationDelay: "0.6s" }}
         >
           Explore the ventures associated with ESP International.
-        </p>
+        </p> */}
 
         {/* Featured Projects */}
-        <div className="mt-20 md:mt-24">
+        {/* <div className="mt-20 md:mt-24">
           <div className="text-center mb-10 md:mb-14">
             <span
               className={cn(
@@ -216,7 +216,7 @@ const ESPSection = () => {
               </figure>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
